@@ -60,7 +60,7 @@ function saveValues(textEl, timeEl) {
 
 function loadTasks() {
 // Get item from local storage if any //
-$("#hour-9 .content-box").val(localStorage.getItem("text-09"));
+$("#hour-09 .content-box").val(localStorage.getItem("text-09"));
 $("#hour-10 .content-box").val(localStorage.getItem("text-10"));
 $("#hour-11 .content-box").val(localStorage.getItem("text-11"));
 $("#hour-12 .content-box").val(localStorage.getItem("text-12"));
