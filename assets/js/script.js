@@ -6,44 +6,82 @@ currentTime = moment();
 $("#currentDay").html(
   `Today's date is: ${currentTime.format("MMMM Do, YYYY")}`
 );
-// Retrieve Id attribute from parent
-id = $(".saveBtn").parent().attr("id").replace("hour-", "");
 
-// Function handler
-$(document).ready(function () {
-  // SaveBtn click listener
-  $(".saveBtn").on("click", function () {
-    // Store values from within the content-box
-    textEl = $(".content-box").val();
-    // Set the local storage
-    localStorage.setItem("text", textEl);
-    localStorage.setItem("id", id);
-  });
-});
-
+// Storing nodelist of all timeblocks 
 var arr = document.querySelectorAll(".time-block");
 console.log(arr);
 
-// loop over time blocks
+  // SaveBtn click listener
+  $(".saveBtn").on('click', function(){
+    // Store values from within the content-box
+    var textEl = $(this).siblings(".content-box").val();
+    // Retrieve Id attribute from parent
+    var timeEl = $(this).parent().attr("id").replace("hour-","");
+
+    console.log(timeEl);
+    console.log(textEl);
+
+   saveValues(textEl, timeEl)
+  }) 
+
+   // Storing unique key value pairs that don't override
+  function saveValues(textEl, timeEl) {
+     // Save time and text in local storage
+     if (timeEl == 09) {
+     localStorage.setItem("key-09", timeEl);
+     localStorage.setItem("text-09", textEl);
+     console.log("yes");
+     }
+     else if (timeEl == 10) {
+      localStorage.setItem("key-10", timeEl);
+      localStorage.setItem("text-10", textEl);
+     }
+     else if (timeEl == 11) {
+      localStorage.setItem("key-11", timeEl);
+      localStorage.setItem("text-11", textEl);
+    }
+    else if (timeEl == 12) {
+      localStorage.setItem("key-12", timeEl);
+      localStorage.setItem("text-12", textEl);
+    }
+    else if (timeEl == 13) {
+      localStorage.setItem("key-13", timeEl);
+      localStorage.setItem("text-13", textEl);
+    }
+    else if (timeEl == 14) {
+      localStorage.setItem("key-14", timeEl);
+      localStorage.setItem("text-14", textEl);
+    }
+    else if (timeEl == 15) {
+      localStorage.setItem("key-15", timeEl);
+      localStorage.setItem("text-15", textEl);
+    }
+    else if (timeEl == 16) {
+      localStorage.setItem("key-16", timeEl);
+      localStorage.setItem("text-16", textEl);
+    }
+    else {
+      localStorage.setItem("key-17", timeEl);
+      localStorage.setItem("text-17", textEl);
+    }
+  }
+
+
+
+// TimeBlocks Function
 function timeBlocks() {
   arr.forEach(function (item) {
-    //console.log(item);
-    var textArea = item.querySelector(".content-box");
-    //console.log(textArea);
-    //retrieving id in loop to compare with military time
+    console.log(item);
+    // Retrieving id in loop to compare with military time
     var ids = item.getAttribute("id").replace("hour-", "");
-    //console.log(ids);
+    // Loop over and apply CSS styling
     if (ids < moment().format("HH")) {
+      // Office hours showed me how to use jquery to particularize search for textbox relative to ID
       $(`#${item.getAttribute("id")} .content-box`).addClass("past");
-      console.log(
-        $(`#${item.getAttribute("id")} .content-box`).addClass("past")
-      );
     } else if (ids === moment().format("HH")) {
-      $(textArea).addClass("present");
-      //console.log(textArea);
+      $(`#${item.getAttribute("id")} .content-box`).addClass("present");
     } else {
-      $(textArea).addClass("future");
-      //console.log($(textArea));
+      $(`#${item.getAttribute("id")} .content-box`).addClass("future");
     }
   });
 }
